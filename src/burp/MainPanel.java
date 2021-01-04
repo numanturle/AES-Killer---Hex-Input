@@ -129,9 +129,9 @@ public class MainPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setText("Secret Key");
+        jLabel1.setText("Secret Key (HEX)");
 
-        jLabel2.setText("Initialize Vector");
+        jLabel2.setText("Initialize Vector (HEX)");
 
         jLabel3.setText("Request starts with (Leave Blank if none)");
 
@@ -396,6 +396,16 @@ public class MainPanel extends javax.swing.JPanel {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+    
+    public static byte[] hexStringToByteArray(String s) {
+        int len = s.length();
+        byte[] data = new byte[len / 2];
+        for (int i = 0; i < len; i += 2) {
+            data[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4)
+                                + Character.digit(s.charAt(i+1), 16));
+        }
+        return data;
+    }
 
     private boolean check_input(){
         String secret_key = this.jTextField1.getText().trim();
@@ -419,8 +429,8 @@ public class MainPanel extends javax.swing.JPanel {
         if(!check_input()){ return;}
         try {
             this.myburp.cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-            this.myburp.sec_key = new SecretKeySpec(this.jTextField1.getText().getBytes(),"AES");
-            this.myburp.iv_param = new IvParameterSpec(this.jTextField2.getText().getBytes());
+            this.myburp.sec_key = new SecretKeySpec(hexStringToByteArray (this.jTextField1.getText()),"AES");
+            this.myburp.iv_param = new IvParameterSpec(hexStringToByteArray(this.jTextField2.getText()));
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(MainPanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchPaddingException ex) {
@@ -453,8 +463,8 @@ public class MainPanel extends javax.swing.JPanel {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         try {
             this.myburp.cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-            this.myburp.sec_key = new SecretKeySpec(this.jTextField1.getText().getBytes(),"AES");
-            this.myburp.iv_param = new IvParameterSpec(this.jTextField2.getText().getBytes());
+            this.myburp.sec_key = new SecretKeySpec(hexStringToByteArray (this.jTextField1.getText()),"AES");
+            this.myburp.iv_param = new IvParameterSpec(hexStringToByteArray(this.jTextField2.getText()));
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(MainPanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchPaddingException ex) {
@@ -476,8 +486,8 @@ public class MainPanel extends javax.swing.JPanel {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         try {
             this.myburp.cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-            this.myburp.sec_key = new SecretKeySpec(this.jTextField1.getText().getBytes(),"AES");
-            this.myburp.iv_param = new IvParameterSpec(this.jTextField2.getText().getBytes());
+            this.myburp.sec_key = new SecretKeySpec(hexStringToByteArray (this.jTextField1.getText()),"AES");
+            this.myburp.iv_param = new IvParameterSpec(hexStringToByteArray(this.jTextField2.getText()));
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(MainPanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchPaddingException ex) {

@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 
 public class BurpExtender implements IBurpExtender, ITab, IProxyListener, IHttpListener
 {
-    public String ExtensionName =  "AES Killer";
+    public String ExtensionName =  "AES Killer Hex Input";
     public String TabName = "AES Killer";
     
     public IBurpExtenderCallbacks callbacks;
